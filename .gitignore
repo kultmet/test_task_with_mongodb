@@ -2,3 +2,4 @@ venv/
 stock/
 dump/
 __pycache__/
+./.env
