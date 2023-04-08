@@ -1,6 +1,6 @@
 from dateutil.relativedelta import relativedelta
 
-correct_format = (
+CORRECT_FORMAT = (
     'Пример запроса:\n'
     '{\n"dt_from": "2022-09-01T00:00:00",\n"dt_upto": '
     '"2022-12-31T23:59:00",\n'
@@ -22,7 +22,7 @@ GROUP_TIPES = {
     'hour': {'year': year, 'month': month, 'day': day, 'hour': hour},
 }
 
-periods = {
+PERIODS = {
     'minute': relativedelta(minutes=1),
     'hour': relativedelta(hours=1),
     'day': relativedelta(days=1),

@@ -1,6 +1,9 @@
-from pymongo import MongoClient
-import datetime
 from ast import literal_eval
+import datetime
+import json
+
+from pymongo import MongoClient
+
 from constants import *
 
 client = MongoClient(
@@ -12,6 +15,7 @@ client = MongoClient(
 db = client.statistics_db
 collection = db.statistics_collection
 
+
 def read(input_data: str) -> dict:
     """Reads a message and converts it to a dict."""
     output_data = literal_eval(input_data)
@@ -20,12 +24,11 @@ def read(input_data: str) -> dict:
 
 def check_curent_fields(input_data: dict):
     for key, value in input_data.items():
-        print(key)
         if key not in FIELDS:
             return False
         if not isinstance(value, str):
             return False
-    if input_data['group_type'] not in periods.keys():
+    if input_data['group_type'] not in PERIODS.keys():
         return False
     return True
 
@@ -73,7 +76,7 @@ class Aggregator:
             return
         self.line[dt_from.isoformat()] = 0
         return self._generate_line(
-            dt_from+periods[group_tipe], dt_upto, group_tipe
+            dt_from+PERIODS[group_tipe], dt_upto, group_tipe
         )
 
     def out_date_formation(self, year=1, month=1, day=1, hour=0):
@@ -90,4 +93,5 @@ class Aggregator:
 
     def get_result(self):
         """Well ... everything is clear here."""
-        return self.result_data
+        result = json.dumps(self.result_data)
+        return result
