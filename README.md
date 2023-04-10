@@ -20,6 +20,12 @@ next
 ```
 pip install -r requiremants.txt
 ```
+
+create <code>.env</code> file and add your and token
+```
+touch .env
+echo API_TOKEN=your_token >> .env
+```
 and run
 
 ```
